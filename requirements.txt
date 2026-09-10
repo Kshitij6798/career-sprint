@@ -1,0 +1,9 @@
+streamlit
+google-genai
+firebase-admin
+pandas
+requests
+python-dotenv
+PyPDF2
+python-docx
+ 
