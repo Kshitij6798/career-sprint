@@ -146,7 +146,11 @@ def get_gemini_client(api_key):
 def get_db():
     try:
         if not firebase_admin._apps:
-            cred = credentials.Certificate(os.getenv("FIREBASE_KEY_PATH", "firebase-key.json"))
+            if "FIREBASE_KEY_JSON" in os.environ:
+                key_dict = json.loads(os.environ["FIREBASE_KEY_JSON"])
+                cred = credentials.Certificate(key_dict)
+            else:
+                cred = credentials.Certificate(os.getenv("FIREBASE_KEY_PATH", "firebase-key.json"))
             firebase_admin.initialize_app(cred)
         return firestore.client()
     except Exception:
